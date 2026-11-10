@@ -152,3 +152,14 @@ A suite completa apos esta alteracao passou com **132 testes aprovados**, com um
 ## Checagem para a apresentacao
 
 Adicionado `scripts/checar_bancada.py`, somente leitura, com roteiro em [apresentacao_presencial.md](apresentacao_presencial.md). Foi executado nesta bancada: integridade SQLite, saude autenticada da API, igualdade API/SQLite, chegada de novos IDs em 12 segundos, fila com zero pendencias e falhas e sucesso recente, ID 5930 igual no Supabase e saude do dashboard publico HTTP 200. Resultado: nenhum item requerendo atencao. Isso nao garante as condicoes da rede do local da apresentacao; repetir a checagem la. Nenhum servico foi encerrado.
+
+
+## Hotspot do celular validado
+
+Em 10/11/2026 o notebook e o ESP32 passaram a usar o hotspot em 2,4 GHz. SSID, senha e IPv4 foram configurados somente em arquivos locais ignorados, preservando a chave da FastAPI e sem modificar o processamento FFT ou habilitar TACH. Foram preservados a fonte/configuracao anterior, binarios e uma imagem de 4 MB da flash; a aplicacao anterior foi verificada contra a placa. A verificacao integral da imagem apos reinicio nao coincidiu e nao e registrada como aprovada; a verificacao da aplicacao coincidiu.
+
+Compilacao e gravacao na COM8 terminaram com codigo zero. O perfil da rede era Private e as permissoes Python existentes eram Public. Apos autorizacao explicita do operador, foi aplicada uma unica regra nova, limitada a TCP 8000, interface Wi-Fi, perfil Private, programa da API, IP local e IP de origem do ESP32. O escopo efetivo foi conferido. O firewall nao foi desativado nem foram alteradas regras antigas.
+
+Serial a 115200 baud: 20 janelas FFT e tres ACKs HTTP 201, IDs **5973, 5974 e 5975**, sem falhas HTTP nessa captura. Os mesmos IDs e valores foram conferidos pela API autenticada, SQLite com origem real e leitura publica do Supabase. O checklist observou novos IDs em 12 segundos, fila sem pendencias ou falhas e saude HTTP 200 da API e do Streamlit. Evidencia: [hotspot_validacao.json](evidencias_cloud/hotspot_validacao.json). A condicao mecanica do ventilador nao foi registrada nesse teste; nao e um novo ensaio de falha ou validacao de ML.
+
+Mantenha o mesmo hotspot em 2,4 GHz e rode o checklist ao retomar. DHCP pode mudar os IPs do notebook e do ESP32; a URL gravada e a regra restrita precisam continuar correspondendo aos enderecos atuais. Configuracoes anteriores e auxiliares ficam privados em `.marco3_local/`; a COM8 foi liberada ao terminar.

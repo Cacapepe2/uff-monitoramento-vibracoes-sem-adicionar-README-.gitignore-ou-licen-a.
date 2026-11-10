@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-11-10T14:41:30.929353+00:00",
+  "network": "hotspot celular 2.4 GHz",
+  "credentials_and_private_ips_omitted": true,
+  "firmware_compile_exit": 0,
+  "firmware_upload_exit": 0,
+  "previous_flash_bytes_backed_up": 4194304,
+  "previous_application_verified": true,
+  "serial_baud": 115200,
+  "serial_fft_windows": 20,
+  "serial_http_201_ids": [
+    5973,
+    5974,
+    5975
+  ],
+  "sqlite_origin_real": true,
+  "api_values_equal_sqlite": true,
+  "cloud_values_equal_sqlite": true,
+  "firewall_rule_authorized_by_operator": true,
+  "firewall_rule_scope_verified": true,
+  "firewall_rule_name": "UFF-Monitoramento-Hotspot-8000",
+  "mechanical_condition": "nao registrada neste teste de conectividade",
+  "tach_enabled": false
+}

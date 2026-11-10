@@ -17,6 +17,7 @@ FILES=('README.md','.gitignore','.streamlit/config.toml','.streamlit/secrets.exa
        'docs/evidencias_cloud/validacao.json',
        'docs/evidencias_cloud/supabase_real.json',
        'docs/evidencias_cloud/deploy_publico.json','docs/evidencias_cloud/qrcode_dashboard.png',
+       'docs/evidencias_cloud/hotspot_validacao.json',
        '.github/workflows/tests.yml','.env.example','.env.cloud.example')
 
 
