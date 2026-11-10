@@ -1,0 +1,90 @@
+{
+  "verificado_em": "2026-11-10T06:44:16.823206+00:00",
+  "pytest": {
+    "aprovados": 129,
+    "avisos": 1,
+    "aviso": "Starlette TestClient preexistente"
+  },
+  "postgres_rls": {
+    "motor": "PGlite 0.5.16",
+    "resultado": "PASS",
+    "auth_uid": "simulado somente no teste; nao e validacao do Supabase hospedado"
+  },
+  "preservacao": {
+    "registros_anteriores_ao_cloud_inalterados": 1143,
+    "tabelas_experimentais_e_modelos_inalteradas": {
+      "experimentos": 1,
+      "sessoes_experimentais": 6,
+      "medicoes_sessoes": 355,
+      "eventos_experimentais": 1,
+      "modelos_ml": 2,
+      "ml_treino": 200,
+      "ml_scores": 710,
+      "auditoria_sessoes": 20
+    },
+    "arquivos_protegidos_inalterados": {
+      "firmware_fisico\\firmware_fisico.ino": true,
+      "firmware_fisico\\processamento.h": true,
+      "firmware_fisico\\secrets.example.h": true,
+      "firmware_fisico\\secrets.h": true,
+      "firmware_fisico\\tacometro.h": true,
+      "wokwi\\diagnostico.ino": true,
+      "wokwi\\diagram.json": true,
+      "wokwi\\libraries.txt": true,
+      "wokwi\\sketch.ino": true,
+      "wokwi\\sketch_pronto.ino": true,
+      "dashboard\\app.py": true,
+      "docs\\diagnostico_ml.md": true,
+      "docs\\evidencias_ml\\avaliacao_fisica.json": true
+    },
+    "integrity_check": "ok",
+    "foreign_key_check": "ok"
+  },
+  "replay": {
+    "medicoes_reais": 355,
+    "scores_historicos": 710,
+    "verificados_contra_sqlite": true,
+    "sha256": "1f5bab674b0e4c506f01cb4d0bb4b842f55cdf55a4d282b29741ee5e3ff840b3"
+  },
+  "fila_local": {
+    "source_id": "8b0d6bed-04db-428e-bea5-140b730a26c5",
+    "total": 2291,
+    "pending": 2291,
+    "failed": 0,
+    "last_success_at": null
+  },
+  "sincronizacao_hospedada": "nao executada; credenciais ausentes",
+  "painel_local": {
+    "url": "http://127.0.0.1:8501",
+    "health_http": 200,
+    "paginas": "AppTest aprovado; celular/navegador pendentes"
+  },
+  "fastapi_health": {
+    "status": "ok",
+    "banco": "ok",
+    "auth": true
+  },
+  "deploy": {
+    "executado": false,
+    "url_publica": null,
+    "qrcode": null
+  },
+  "scanner": {
+    "segredos_conhecidos_na_allowlist": false,
+    "arquivos_locais_com_segredos_excluidos": [
+      "firmware_fisico/secrets.h",
+      "wokwi/sketch_pronto.ino"
+    ]
+  },
+  "pacote_publicacao": {
+    "pasta_local": ".marco3_local/publicacao_streamlit",
+    "arquivos_no_indice": 72,
+    "branch": "main",
+    "commit": false,
+    "remoto": false,
+    "push": false,
+    "smoke_test_isolado": "PASS"
+  },
+  "dependencias_pip_check": "No broken requirements found",
+  "dashboard_apos_ajustes": "9 AppTests aprovados; timestamps de consulta representam fetch real, inclusive com cache"
+}

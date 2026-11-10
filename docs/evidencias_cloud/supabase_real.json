@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-10T13:29:44.078834+00:00",
+  "anonymous_read": true,
+  "unique_objects": 6459,
+  "counts": {
+    "event": 1,
+    "measurement": 5384,
+    "membership": 355,
+    "model": 2,
+    "score": 710,
+    "session": 6,
+    "status": 1
+  },
+  "all_payloads_equal_to_outbox": true,
+  "operator_catalog_checks": 28,
+  "operator_full_sql_checks": true,
+  "source_published": true,
+  "public_dashboard_url": null,
+  "qr_code": null,
+  "dashboard_apptest_real_cloud": true,
+  "dashboard_sections_checked": 6,
+  "dashboard_checked_at": "2026-11-10T13:30:54.349983+00:00"
+}

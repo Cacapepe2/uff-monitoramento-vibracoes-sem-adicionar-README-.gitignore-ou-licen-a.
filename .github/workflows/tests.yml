@@ -1,0 +1,20 @@
+name: Testes locais e painel publico
+on: [push, pull_request]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements-diagnostico.txt -r dashboard/requirements.txt
+      - run: python -m pytest -q
+      - run: python scripts/preparar_publicacao.py --check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --prefix /tmp/pgtest @electric-sql/pglite@0.5.16
+      - run: node supabase/tests/rls.test.mjs
+        env:
+          PGLITE_MODULE: /tmp/pgtest/node_modules/@electric-sql/pglite/dist/index.js

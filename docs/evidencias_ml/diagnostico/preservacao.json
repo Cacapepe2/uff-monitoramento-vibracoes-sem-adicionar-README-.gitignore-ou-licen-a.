@@ -1,0 +1,39 @@
+{
+  "verificado_em": "2026-11-10T06:09:53.604592+00:00",
+  "modelos_scores_vinculos_iguais_snapshot": {
+    "sha256": "2106d9153c21a97f9c65c0a0593943cbd0b73d4fde69d311a1c18ff078dc86ac",
+    "modelos": 2,
+    "scores": 710,
+    "vinculos_treino": 200
+  },
+  "arquivos_originais_preservados": {
+    "analytics/isolation.py": true,
+    "docs/evidencias_ml/avaliacao_fisica.json": true,
+    "docs/resultados_experimentais.md": true,
+    "relatorios/experimento_fisico.html": true,
+    "docs/evidencias_ml/coleta_BORRACHA_01.json": true,
+    "docs/evidencias_ml/coleta_MADEIRA_01.json": true,
+    "docs/evidencias_ml/coleta_NORMAL_01.json": true,
+    "docs/evidencias_ml/coleta_NORMAL_02.json": true,
+    "docs/evidencias_ml/coleta_RETORNO_01.json": true,
+    "docs/evidencias_ml/coleta_TOQUE_01.json": true
+  },
+  "firmware_wokwi_e_configuracoes_protegidas_preservados": true,
+  "registros_anteriores_preservados": 140,
+  "seis_sessoes_vinculos_e_medicoes_experimentais_preservados": true,
+  "integrity_check": "ok",
+  "foreign_key_check": "ok",
+  "testes": "101 passed; 1 warning TestClient",
+  "ambiente_ml_original": "numpy 2.4.6; sklearn 1.9.1; sem alteracao",
+  "artefatos_diagnostico_sha256": {
+    "01_distribuicoes.png": "1a8c75014ca6e7397a002da9ea7201f490afbb6fe8e68b4fcc30282c7d0b688b",
+    "01_distribuicoes.svg": "c9ee90a59d23efdf2d18154a43aa71ad0fbc224afbbf5c7d280d11037bd2737f",
+    "02_tempo_features.png": "01c1c5f8f6542634dbe082c56b3edeaa791379e50cc073f3d6bf314e883ee31d",
+    "02_tempo_features.svg": "d00b57912980c79bcd9f648eda124c752b0276bff0e64f06d3ac423896643156",
+    "03_espaco_conjunto.png": "877cf7c76020d938db14415e1acc3187a313f57cba9ba9920400b648b5ff99d2",
+    "03_espaco_conjunto.svg": "7230200579e91c0c351b8f3213215db217be5f471f66884cbfc31dc983bbbe21",
+    "04_scores_continuos.png": "3154aeba9696487e327d4be165c5c891e46817ed1fc8c6aada85dd4266cdbcd7",
+    "04_scores_continuos.svg": "d1bb7f71822f1bc79a57cf9175fd6e764f95ecf43dd470a974a708d39316fa10",
+    "auditoria.json": "4ee7e68b1512109ef4abc4eb3eea0cacd72184710e3d595aa63038ac5fa745eb"
+  }
+}
