@@ -15,6 +15,7 @@ FILES=('README.md','.gitignore','.streamlit/config.toml','.streamlit/secrets.exa
        'docs/resultados_experimentais.md','docs/protocolo_experimental.md','docs/roteiro_bancada_ml.md',
        'docs/evidencias_cloud/validacao.json',
        'docs/evidencias_cloud/supabase_real.json',
+       'docs/evidencias_cloud/deploy_publico.json','docs/evidencias_cloud/qrcode_dashboard.png',
        '.github/workflows/tests.yml','.env.example','.env.cloud.example')
 
 

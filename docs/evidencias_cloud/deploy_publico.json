@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-11-10T14:00:56.192336+00:00",
+  "url": "https://tvxmuwbubmciksacfqwcrw.streamlit.app/",
+  "anonymous_http": 200,
+  "health_http": 200,
+  "operator_reported_deploy_success": true,
+  "public_browser_metrics_verified": false,
+  "websocket_probe": "InvalidHeader: Sec-WebSocket-Accept; validation not bypassed",
+  "supabase_latest_checked_measurement_id": 5815,
+  "supabase_payload_equal_to_outbox": true,
+  "qrcode": "qrcode_dashboard.png",
+  "qrcode_sha256": "7412cb749046ddfbcabbf84d7c2ae7cd7cc2d0b7676d8c60b795ee7039087c15",
+  "qrcode_pixels": [
+    410,
+    410
+  ],
+  "last_full_suite_tests_passed": 132,
+  "qr_and_cloud_tests_passed": 24,
+  "remaining_manual_check": "Abrir dashboard em janela anonima; conferir modo Nuvem, metricas e ID; conferir celular."
+}

@@ -28,8 +28,10 @@
   "dashboard/data/replay.json": "1f5bab674b0e4c506f01cb4d0bb4b842f55cdf55a4d282b29741ee5e3ff840b3",
   "dashboard/public_view.py": "27a6a5fc544fba48db7f4d2d3cf2955004e1e32cb903a6830bfed64f09568448",
   "dashboard/requirements.txt": "7581eb9f68ceb982538ad75d66d4163da6cf320188c34cc9ea8684ecf42accfb",
-  "docs/DEPLOY_STATUS.md": "e87f93081bcd740fd5d1250b4b94e5809dabc63ce019e61dd6a19c325c6fee6f",
+  "docs/DEPLOY_STATUS.md": "b3b8a811df934b7d4591ba6bb8894335c57a3898435aad5003768994a80ad4d6",
   "docs/diagnostico_ml.md": "5734e9fbc4f712d4ff6c60f5254afce66c57c4dc2e6d5fdae105349de776a14a",
+  "docs/evidencias_cloud/deploy_publico.json": "eb7dae9f45eaa28c7ec2b0fd32959143e59063631d447c58f78505c323082694",
+  "docs/evidencias_cloud/qrcode_dashboard.png": "7412cb749046ddfbcabbf84d7c2ae7cd7cc2d0b7676d8c60b795ee7039087c15",
   "docs/evidencias_cloud/supabase_real.json": "7d72a1a6949039a8b5744e4de79d8a57a4b5ecdcb14e45f148c0ab272ddf90a2",
   "docs/evidencias_cloud/validacao.json": "372950e2b6d0c22e9f82c613e181eb2a86f15d6cd2a558f418ac99ea5eed5c23",
   "docs/evidencias_ml/diagnostico/01_distribuicoes.png": "1a8c75014ca6e7397a002da9ea7201f490afbb6fe8e68b4fcc30282c7d0b688b",
@@ -57,9 +59,9 @@
   "scripts/diagnosticar_ml.py": "3ae8622688b60cf4fb03a845cae32d8645175e535c143f85ef3d01165b53f027",
   "scripts/experimento.py": "12647c5d882e2a2b462c95cbb5948e9b2efcf7a4ac12da5f64b7e71a1cf68ba0",
   "scripts/exportar_replay.py": "ee0b4de92c7a1afdd3c90d77aa5cb2e84527bcc29046a97db3a97e96fe7cd159",
-  "scripts/gerar_qrcode.py": "20d4473f47a73901cd7badeb3c4064174721500de5d28edaefd32358198ca940",
+  "scripts/gerar_qrcode.py": "87a1b7c6296f2aca8640e58e01c8a892ebc0d365cbaaba06084931ce56111e46",
   "scripts/iniciar_api_local.py": "ad49e31c6b443787944c4b7fc0192d74dd534b93974e0209796a937b684b66b0",
-  "scripts/preparar_publicacao.py": "049aac8f3ade68930c0534c62d6538b7a317fc919167498c2871a9acd0a08e54",
+  "scripts/preparar_publicacao.py": "f963bdb7e84cc432b40334e3269fe86fad885203f0381fed7f8331abaed787f3",
   "scripts/print_banco.py": "3585747c56987a03385b2b51e48bb9d0485c1147ec9fb17af992a9c332c27902",
   "scripts/simular_envio.py": "902a60caf7c11041318320f311261dde37d6fc878d8ded4b558049a1841adb0a",
   "scripts/sincronizar_supabase.py": "0af89876927874c15fa695422556a7cea02d7ac85a3f9464a6d439031fd0513e",
@@ -73,5 +75,6 @@
   "tests/test_diagnostico_ml.py": "bbb649130aa6e2cc392d4e1fa1b18f4f0fccbbf2969e4db298ab3614611c17ff",
   "tests/test_experimentos.py": "6c998236fe8661bd952fd3c274253031067ba372d2ff12ce05028eb543c6f098",
   "tests/test_marco3.py": "c525bdcf102807b2ce2001d74d31e431b395ffb6411b03b9b87a795cee40da21",
-  "tests/test_ml_experimental.py": "6b459e7e092bad6612909c6cabaeb3e8f983ccee3b4926df0c8f5972c7f8d82f"
+  "tests/test_ml_experimental.py": "6b459e7e092bad6612909c6cabaeb3e8f983ccee3b4926df0c8f5972c7f8d82f",
+  "tests/test_qrcode_redirects.py": "5d1e546d18c9e67c68740d71884e729e3578771fb0c32d1445b0116d18a01738"
 }

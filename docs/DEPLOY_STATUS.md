@@ -1,5 +1,20 @@
 # Estado da publicação — 10/11/2026
 
+## Estado atual: dashboard publicado
+
+Dashboard: [abrir painel publico](https://tvxmuwbubmciksacfqwcrw.streamlit.app/).
+
+QR Code: [baixar PNG](evidencias_cloud/qrcode_dashboard.png). A imagem aponta exatamente para a URL acima. Pagina publica e endpoint `/_stcore/health` responderam HTTP 200 em sessao sem login. Os redirecionamentos HTTPS oficiais de bootstrap do Community Cloud foram seguidos; nao foi utilizada conta autenticada nessa verificacao.
+
+O operador confirmou a conclusao do deploy. A tentativa adicional de verificar metricas por WebSocket foi recusada pelo cliente por cabecalho `Sec-WebSocket-Accept` invalido; nenhuma validacao de seguranca foi desativada. Portanto a conferencia visual final das metricas e do modo Nuvem em janela anonima/celular ainda depende do operador. HTTP 200 sozinho nao comprova carregamento das metricas.
+
+A leitura anonima direta do Supabase confirmou o payload integral de uma medicao recente igual a outbox local; ID e horario da verificacao estao em [deploy_publico.json](evidencias_cloud/deploy_publico.json). Nao se confunde esse teste de dados com verificacao da sessao hospedada do Streamlit.
+
+Testes: ultima suite completa com 132 aprovados; nesta etapa 24 testes de sincronizacao/QR aprovados, incluindo bootstrap e bloqueio de redirects inseguros. QR gerado com qrcode 8.2 e PNG validado. Firmware, modelos e historico preservados. Nao houve recurso pago, tunel ou mudanca de firewall. O notebook precisa permanecer ligado com FastAPI e worker para novas medicoes; o historico ja sincronizado continua consultavel pela nuvem.
+
+As secoes abaixo registram a evolucao da entrega; suas pendencias antigas foram superadas onde indicado nesta atualizacao.
+
+
 ## Atualização: sincronização hospedada
 
 Auth e RPC foram validados no Supabase real, por HTTPS. O UUID autenticado corresponde ao usuário exclusivo e a escrita anônima foi negada. O operador confirmou por SQL os IDs reais 275–277: três linhas mesmo após reenvio, com payload integral, revisão e hash iguais ao SQLite. Após a conferência completa, o operador habilitou a origem para **leitura pública**, preservando as restrições de escrita.
