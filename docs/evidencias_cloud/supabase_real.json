@@ -19,5 +19,8 @@
   "qr_code": null,
   "dashboard_apptest_real_cloud": true,
   "dashboard_sections_checked": 6,
-  "dashboard_checked_at": "2026-11-10T13:30:54.349983+00:00"
+  "dashboard_checked_at": "2026-11-10T13:30:54.349983+00:00",
+  "github_repository": "https://github.com/Cacapepe2/uff-monitoramento-vibracoes-sem-adicionar-README-.gitignore-ou-licen-a.",
+  "github_branch": "main",
+  "github_initial_commit_verified": "918892638d9f78d17118c9f917c38fd0b02d8db0"
 }

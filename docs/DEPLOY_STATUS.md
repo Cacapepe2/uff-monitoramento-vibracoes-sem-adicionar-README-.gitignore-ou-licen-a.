@@ -10,7 +10,13 @@ A consulta `.marco3_local/verificar_carga_supabase.sql` foi executada no Supabas
 
 O SQLite passou em `integrity_check`; todas as linhas existentes antes da carga foram comparadas por tabela e preservadas. A outbox foi copiada antes do envio. A API local estava parada e foi reiniciada em segundo plano: `/health` retornou HTTP 200, `banco=ok`, `auth=True`. Não houve alteração de firewall ou exposição pública da API. A suíte completa foi reexecutada: **129 testes aprovados**, com um aviso preexistente de depreciação; os testes do painel agora isolam variáveis de nuvem para não usar credenciais locais reais.
 
-Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote `.marco3_local/publicacao_streamlit/` foi atualizado e auditado: **74 arquivos versionados**, incluindo o manifesto, e commit local criado com a identidade Git já configurada. Nenhum remoto ou push foi configurado. Os arquivos extras encontrados eram apenas caches Python ignorados pelo Git e foram preservados.
+Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote `.marco3_local/publicacao_streamlit/` foi atualizado e auditado: **74 arquivos versionados**, incluindo o manifesto, e commit local criado com a identidade Git já configurada. O remoto GitHub foi configurado e o push da branch `main` foi concluido, com igualdade do commit local e remoto. Os arquivos extras encontrados eram apenas caches Python ignorados pelo Git e foram preservados.
+
+### Repositorio publicado no GitHub
+
+O pacote auditado foi enviado para [uff-monitoramento-vibracoes-sem-adicionar-README-.gitignore-ou-licen-a.](https://github.com/Cacapepe2/uff-monitoramento-vibracoes-sem-adicionar-README-.gitignore-ou-licen-a.), branch `main`. O commit remoto foi comparado ao local e corresponde ao pacote auditado. O manifesto e 81 blobs do historico foram verificados sem valores de segredos conhecidos antes do primeiro push. Nenhum `.env`, secrets local, SQLite, outbox, backup ou pickle foi incluido.
+
+Entrypoint para Streamlit Community Cloud: `dashboard/app_publico.py`. Dependencias: `dashboard/requirements.txt`; horario de Brasilia com `tzdata`. Os secrets de leitura estao prontos apenas no arquivo local ignorado `.streamlit/secrets.toml`. Login e criacao do app no Streamlit ainda dependem do operador; nao ha URL publica do dashboard ou QR Code confirmados.
 
 ### Dashboard e operação nesta etapa
 
