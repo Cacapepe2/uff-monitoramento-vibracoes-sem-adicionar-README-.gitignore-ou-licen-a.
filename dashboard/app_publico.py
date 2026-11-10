@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from cloud_sync.public_data import ML_WARNING,validate_document
 from cloud_sync.transport import Supabase
-from dashboard.public_view import bundled,measurement_state,replay_window,unpack
+from dashboard.public_view import bundled,measurement_state,replay_window,unpack,brazil_time,brazil_rows
 
 st.set_page_config(page_title='Atividade de Extensão de Sistema de Computação',page_icon='📈',layout='wide')
 st.markdown('''<style>
@@ -53,6 +53,7 @@ st.sidebar.header('Explore o projeto')
 mode=st.sidebar.radio('Fonte dos dados',['Nuvem · Supabase','Replay · histórico real'],index=0 if ready else 1)
 page=st.sidebar.radio('Navegação',['Visão geral','Histórico de vibração','Sessões experimentais','Machine Learning experimental','Como funciona','Limitações e próximos passos'])
 st.sidebar.caption('Somente leitura. Nenhum comando é enviado ao ESP32.')
+st.sidebar.caption('Horários de Brasília (America/Sao_Paulo). Originais preservados em UTC.')
 if mode.startswith('Replay'):
     play=st.sidebar.toggle('Reproduzir a cada 5 segundos',value=False)
     if st.sidebar.button('Reiniciar replay'):st.session_state['replay_cursor']=1
@@ -61,11 +62,11 @@ else:play=False
 
 
 def graph(rows,field,title,unit):
-    fig=go.Figure(go.Scatter(x=[r['instante'] for r in rows],y=[r[field] for r in rows],
+    fig=go.Figure(go.Scatter(x=[brazil_time(r['instante'],chart=True) for r in rows],y=[r[field] for r in rows],
         mode='lines+markers',line={'color':'#2463A6','width':2},marker={'size':4},
         customdata=[r['id'] for r in rows],hovertemplate='ID %{customdata}<br>%{x}<br>%{y}<extra></extra>',
         connectgaps=False))
-    fig.update_layout(title=title,xaxis_title='Recepção original (UTC)',yaxis_title=unit,
+    fig.update_layout(title=title,xaxis_title='Recepção original (horário de Brasília)',yaxis_title=unit,
         margin=dict(l=10,r=10,t=45,b=20),height=310,paper_bgcolor='#F8FAFC',plot_bgcolor='white')
     st.plotly_chart(fig,width='stretch')
 
@@ -98,7 +99,7 @@ def monitor():
             if 'cloud_last_data' not in st.session_state:return
             objects=unpack(st.session_state['cloud_last_data'])
             st.warning('Mostrando último resultado em cache — conexão não confirmada.')
-        st.caption('Última consulta bem-sucedida: '+st.session_state.get('cloud_last_fetch','indisponível'))
+        st.caption('Última consulta bem-sucedida: '+brazil_time(st.session_state.get('cloud_last_fetch')))
     measurements=objects['measurement']
     memberships={r['medicao_id']:r for r in objects['membership']}
     sessions={r['id']:r for r in objects['session']}
@@ -107,10 +108,10 @@ def monitor():
     state,age=measurement_state(measurements)
     if historical:st.caption('Conexão com sensor: não se aplica ao replay. Último horário abaixo é histórico.')
     else:st.caption(f'Sensor: {state}. Idade da última recepção: {max(0,age):.0f} s.' if age is not None else state)
-    st.caption('Última medição original: '+measurements[-1]['instante']+f" · ID {measurements[-1]['id']}")
+    st.caption('Última medição original: '+brazil_time(measurements[-1]['instante'])+f" · ID {measurements[-1]['id']}")
     if objects['status'] and not historical:
         status=objects['status'][0]
-        st.caption(f"Sincronizador: última confirmação {status['last_success_at'] or 'ainda ausente'} · pendentes na verificação: {status['pending']} · com falha: {status['failed']} · verificado em {status['checked_at']}")
+        st.caption(f"Sincronizador: última confirmação {brazil_time(status['last_success_at']) if status['last_success_at'] else 'ainda ausente'} · pendentes na verificação: {status['pending']} · com falha: {status['failed']} · verificado em {brazil_time(status['checked_at'])}")
     if page=='Visão geral':
         latest=measurements[-1]
         cols=st.columns(3)
@@ -125,7 +126,7 @@ def monitor():
             format_func=lambda x: x if x=='Todas' else f"{sessions[x]['codigo']} · sessão {x} · campanha {sessions[x]['experimento_id'][:8]}")
         rows=[r for r in measurements if selected=='Todas' or memberships.get(r['id'],{}).get('sessao_id')==selected]
         for field,title,unit in [('rms','RMS ao longo do tempo','m/s²'),('amplitude','Amplitude ao longo do tempo','m/s²'),('pico_fft','Pico dominante ao longo do tempo','Hz')]:graph(rows,field,title,unit)
-        st.dataframe(rows,hide_index=True,width='stretch')
+        st.dataframe(brazil_rows(rows),hide_index=True,width='stretch')
     elif page=='Sessões experimentais':
         st.caption('Mudanças de apoio e perturbações conhecidas; não são ensaios de falhas mecânicas.')
         summary=[];fig=go.Figure()
@@ -149,13 +150,13 @@ def monitor():
         fig=go.Figure()
         for sid,sess in sessions.items():
             points=[r for r in rows if r['sessao_id']==sid]
-            fig.add_trace(go.Scatter(x=[r['instante'] for r in points],y=[r['score_decisao'] for r in points],mode='lines+markers',name=f"{sess['codigo']} · {sid}",customdata=[r['medicao_id'] for r in points],hovertemplate='ID %{customdata}<br>%{y:.5f}<extra></extra>'))
+            fig.add_trace(go.Scatter(x=[brazil_time(r['instante'],chart=True) for r in points],y=[r['score_decisao'] for r in points],mode='lines+markers',name=f"{sess['codigo']} · {sid}",customdata=[r['medicao_id'] for r in points],hovertemplate='ID %{customdata}<br>%{x}<br>%{y:.5f}<extra></extra>'))
         fig.add_hline(y=0,line_dash='dash',line_color='#183153')
-        fig.update_layout(title='Scores históricos — menor significa mais incomum para o modelo',yaxis_title='decision_function',height=430)
+        fig.update_layout(title='Scores históricos — menor significa mais incomum para o modelo',xaxis_title='Recepção original (horário de Brasília)',yaxis_title='decision_function',height=430)
         st.plotly_chart(fig,width='stretch')
         st.caption('Linha zero = limiar histórico preservado. Score não é probabilidade nem gravidade física. Treino somente NORMAL_01.')
         st.info('Na campanha auditada, ambos os modelos alertaram em 26% do treino e 100% de NORMAL_02 e RETORNO_01. Esses resultados não validam o detector para novas sessões normais.')
-        st.dataframe(rows,hide_index=True,width='stretch')
+        st.dataframe(brazil_rows(rows),hide_index=True,width='stretch')
     elif page=='Como funciona':
         for title,text in [
             ('MPU-6050 · sentir','O acelerômetro mede aceleração no eixo X. Fixação e orientação influenciam a medição.'),

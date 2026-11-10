@@ -2,8 +2,30 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from cloud_sync.public_data import validate_document
+
+
+BRAZIL_TIMEZONE = ZoneInfo('America/Sao_Paulo')
+
+
+def brazil_time(value, chart=False):
+    """Converte somente a apresentacao; graficos usam hora local sem reconversao JS."""
+    if not value:
+        return 'indisponível'
+    instant = datetime.fromisoformat(value)
+    if instant.tzinfo is None:
+        raise ValueError('Timestamp sem fuso horario')
+    local = instant.astimezone(BRAZIL_TIMEZONE)
+    if chart:
+        return local.replace(tzinfo=None).isoformat(timespec='milliseconds')
+    return local.strftime('%d/%m/%Y %H:%M:%S') + ' (Brasília)'
+
+
+def brazil_rows(rows):
+    return [{**r, **{key: brazil_time(r[key]) for key in
+                    ('instante', 'calculado_em') if r.get(key)}} for r in rows]
 
 
 def bundled(path):

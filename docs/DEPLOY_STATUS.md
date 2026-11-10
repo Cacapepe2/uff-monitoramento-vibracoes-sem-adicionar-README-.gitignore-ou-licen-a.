@@ -14,6 +14,8 @@ Os resultados anteriores abaixo documentam a preparação inicial; as pendência
 
 ### Dashboard e operação nesta etapa
 
+Gráficos, tabelas e horários de medição, consulta e sincronização são exibidos no fuso **America/Sao_Paulo (Brasília, UTC−3 nas datas desta campanha)**. A conversão ocorre somente na apresentação; SQLite, Supabase, replay e scores mantêm os timestamps UTC originais. A dependência `tzdata` está incluída para disponibilizar o fuso também no Windows.
+
 O painel foi exercitado com leitura real do Supabase por Streamlit AppTest: seis áreas renderizadas sem exceções e três métricas exibidas na visão geral. Não se trata de inspeção visual em celular nem de deploy. Os 28 testes de sincronização e painel passaram após isolar também os secrets locais nos testes; a suíte completa tinha acabado de passar com 129 testes na etapa anterior. Modelos e scores foram preservados.
 
 FastAPI e painel responderam HTTP 200 nos seus endpoints de saúde. O painel local está em **http://127.0.0.1:8501**, com configuração somente de leitura. O worker de sincronização foi iniciado em segundo plano para continuar enviando novas medições enquanto o notebook estiver ligado. Logs e estado operacional ficam na pasta privada `.marco3_local/`. A leitura do histórico não comprova que o ESP32 esteja ligado agora; conferir o horário da última medição no painel.
