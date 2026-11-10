@@ -12,6 +12,7 @@ ROOT=Path(__file__).resolve().parent.parent
 DIRS=('backend','analytics','cloud_sync','dashboard','scripts','tests','supabase')
 FILES=('README.md','.gitignore','.streamlit/config.toml','.streamlit/secrets.example.toml',
        'docs/DEPLOY_STATUS.md','docs/diagnostico_ml.md','docs/guia_nuvem.md',
+       'docs/apresentacao_presencial.md',
        'docs/resultados_experimentais.md','docs/protocolo_experimental.md','docs/roteiro_bancada_ml.md',
        'docs/evidencias_cloud/validacao.json',
        'docs/evidencias_cloud/supabase_real.json',

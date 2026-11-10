@@ -190,3 +190,8 @@ Investigação posterior: [diagnóstico técnico do ML](docs/diagnostico_ml.md),
 Sem configuração remota, abre em replay explícito dos 355 registros físicos e 710 scores preservados. A sincronização SQLite → Supabase é um worker separado; não expõe a FastAPI e não interrompe a aquisição em falhas de internet. O dashboard usa somente leitura e informa que o ML continua experimental, sem generalização validada.
 
 Consulte [DEPLOY_STATUS](docs/DEPLOY_STATUS.md) para o estado efetivamente verificado e [guia de nuvem](docs/guia_nuvem.md) para RLS, outbox, secrets, GitHub, Streamlit Community Cloud e QR Code. Nenhuma URL pública deve ser presumida sem confirmação nesse relatório.
+
+
+## Apresentacao presencial
+
+Execute `.\.venv\Scripts\python.exe scripts/checar_bancada.py` para conferir API, SQLite, novos IDs e sincronizacao sem alterar dados ou mostrar credenciais. Veja o [roteiro presencial](docs/apresentacao_presencial.md) para iniciar servicos, trocar de rede e usar Replay.

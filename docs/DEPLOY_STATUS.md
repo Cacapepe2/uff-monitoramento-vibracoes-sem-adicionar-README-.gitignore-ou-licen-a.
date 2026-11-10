@@ -147,3 +147,8 @@ Detalhes de SQL, permissões, secrets, publicação e QR: [guia de nuvem](guia_n
 ### Validacao da atualizacao incremental
 
 A suite completa apos esta alteracao passou com **132 testes aprovados**, com um aviso preexistente de depreciacao. A visao geral foi exercitada com leitura real do Supabase, tres metricas e ausencia dos dois avisos removidos. A limitacao de generalizacao permanece explicada na area de Machine Learning. A API, o worker, o firmware, os registros e os modelos foram preservados.
+
+
+## Checagem para a apresentacao
+
+Adicionado `scripts/checar_bancada.py`, somente leitura, com roteiro em [apresentacao_presencial.md](apresentacao_presencial.md). Foi executado nesta bancada: integridade SQLite, saude autenticada da API, igualdade API/SQLite, chegada de novos IDs em 12 segundos, fila com zero pendencias e falhas e sucesso recente, ID 5930 igual no Supabase e saude do dashboard publico HTTP 200. Resultado: nenhum item requerendo atencao. Isso nao garante as condicoes da rede do local da apresentacao; repetir a checagem la. Nenhum servico foi encerrado.
