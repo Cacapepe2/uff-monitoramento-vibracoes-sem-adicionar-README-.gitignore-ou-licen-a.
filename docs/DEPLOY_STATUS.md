@@ -10,7 +10,7 @@ A consulta `.marco3_local/verificar_carga_supabase.sql` foi executada no Supabas
 
 O SQLite passou em `integrity_check`; todas as linhas existentes antes da carga foram comparadas por tabela e preservadas. A outbox foi copiada antes do envio. A API local estava parada e foi reiniciada em segundo plano: `/health` retornou HTTP 200, `banco=ok`, `auth=True`. Não houve alteração de firewall ou exposição pública da API. A suíte completa foi reexecutada: **129 testes aprovados**, com um aviso preexistente de depreciação; os testes do painel agora isolam variáveis de nuvem para não usar credenciais locais reais.
 
-Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote de publicação ainda precisa ser atualizado e auditado antes do push.
+Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote `.marco3_local/publicacao_streamlit/` foi atualizado e auditado: **74 arquivos versionados**, incluindo o manifesto, e commit local criado com a identidade Git já configurada. Nenhum remoto ou push foi configurado. Os arquivos extras encontrados eram apenas caches Python ignorados pelo Git e foram preservados.
 
 ### Dashboard e operação nesta etapa
 
