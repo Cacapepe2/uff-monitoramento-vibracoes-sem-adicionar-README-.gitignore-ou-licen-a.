@@ -4,7 +4,7 @@
   "anonymous_http": 200,
   "health_http": 200,
   "operator_reported_deploy_success": true,
-  "public_browser_metrics_verified": false,
+  "public_browser_metrics_verified": true,
   "websocket_probe": "InvalidHeader: Sec-WebSocket-Accept; validation not bypassed",
   "supabase_latest_checked_measurement_id": 5815,
   "supabase_payload_equal_to_outbox": true,
@@ -16,5 +16,7 @@
   ],
   "last_full_suite_tests_passed": 132,
   "qr_and_cloud_tests_passed": 24,
-  "remaining_manual_check": "Abrir dashboard em janela anonima; conferir modo Nuvem, metricas e ID; conferir celular."
+  "remaining_manual_check": "Inspecao em celular e ensaios prolongados opcionais; nao confirmados nesta resposta.",
+  "public_browser_verification_method": "operator confirmed requested anonymous browser check: cloud mode and RMS, amplitude, dominant frequency",
+  "operator_confirmation_at": "2026-11-10T14:07:32.762856+00:00"
 }

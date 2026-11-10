@@ -1,5 +1,9 @@
 # Estado da publicação — 10/11/2026
 
+## Confirmacao final pelo operador
+
+O operador confirmou que a verificacao solicitada passou: acesso publico em janela anonima, modo **Nuvem - Supabase** e exibicao das metricas **RMS, amplitude e frequencia dominante**. Confirmacao humana registrada em `evidencias_cloud/deploy_publico.json`; nao e atribuida ao probe WebSocket, cuja limitacao continua documentada abaixo. A verificacao visual pendente mencionada nas secoes anteriores foi concluida por essa confirmacao. Inspecao em celular e disponibilidade prolongada nao foram afirmadas.
+
 ## Estado atual: dashboard publicado
 
 Dashboard: [abrir painel publico](https://tvxmuwbubmciksacfqwcrw.streamlit.app/).
