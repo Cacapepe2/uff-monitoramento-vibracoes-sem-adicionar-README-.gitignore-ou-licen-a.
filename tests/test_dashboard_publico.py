@@ -13,8 +13,10 @@ def ambiente_painel_isolado(monkeypatch):
     for name in ['SUPABASE_URL', 'SUPABASE_PUBLISHABLE_KEY', 'CLOUD_SOURCE_ID']:
         monkeypatch.delenv(name, raising=False)
     st.cache_data.clear()
+    st.cache_resource.clear()
     yield
     st.cache_data.clear()
+    st.cache_resource.clear()
 
 
 def app():
@@ -25,7 +27,7 @@ def test_publico_renderiza_aviso_e_replay_sem_segredos(monkeypatch):
     for name in ['SUPABASE_URL','SUPABASE_PUBLISHABLE_KEY','CLOUD_SOURCE_ID']:monkeypatch.delenv(name,raising=False)
     at=app();assert not at.exception
     assert at.title[0].value=='Atividade de Extensão de Sistema de Computação'
-    assert any(ML_WARNING==v.value for v in at.warning)
+    assert not any(ML_WARNING==v.value for v in at.warning)
     assert any('REPLAY DE DADOS REAIS HISTÓRICOS' in v.value for v in at.info)
     assert len(at.metric)==3
 
@@ -33,6 +35,8 @@ def test_publico_renderiza_aviso_e_replay_sem_segredos(monkeypatch):
 @pytest.mark.parametrize('page',['Histórico de vibração','Sessões experimentais','Machine Learning experimental','Como funciona','Limitações e próximos passos'])
 def test_paginas_sem_excecao(page):
     at=app();at.sidebar.radio[1].set_value(page).run();assert not at.exception
+    if page=='Machine Learning experimental':
+        assert any(ML_WARNING==v.value for v in at.warning)
 
 
 def test_replay_atualiza_prefixo_sem_alterar_tempo_real():
@@ -68,6 +72,7 @@ def test_nova_consulta_cloud_atualiza_dados_e_falha_nao_vira_replay(monkeypatch)
     monkeypatch.setenv('CLOUD_SOURCE_ID',dataset['source_id'])
     st.cache_data.clear()
     at=app();assert not at.exception
+    assert not at.success
     previous=at.metric[0].value
     last=max((r for r in dataset['objects'] if r['kind']=='measurement'),key=lambda x:x['payload']['id'])
     last['payload']['rms']=123.456 # fixture isolada, nao escreve o replay real

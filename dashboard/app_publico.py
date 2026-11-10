@@ -1,15 +1,15 @@
 """Entrypoint Community Cloud. Leitura anonima Supabase ou replay real identificado."""
 import os
 import sys
-from datetime import datetime,timezone
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent.parent
 sys.path.insert(0,str(ROOT))
 import plotly.graph_objects as go
 import streamlit as st
-from cloud_sync.public_data import ML_WARNING,validate_document
+from cloud_sync.public_data import ML_WARNING
 from cloud_sync.transport import Supabase
+from dashboard.cloud_reader import IncrementalReader
 from dashboard.public_view import bundled,measurement_state,replay_window,unpack,brazil_time,brazil_rows
 
 st.set_page_config(page_title='Atividade de Extensão de Sistema de Computação',page_icon='📈',layout='wide')
@@ -27,7 +27,6 @@ div[data-testid="stColumn"]{min-width:100%!important;flex:100%!important}}
 </style>''',unsafe_allow_html=True)
 st.title('Atividade de Extensão de Sistema de Computação')
 st.markdown('<div class="intro">Monitoramento Inteligente de Vibrações com ESP32 e Machine Learning</div>',unsafe_allow_html=True)
-st.warning(ML_WARNING)
 
 
 def config(name):
@@ -35,11 +34,14 @@ def config(name):
     except (FileNotFoundError,st.errors.StreamlitSecretNotFoundError):return os.getenv(name,'')
 
 
-@st.cache_data(ttl=5,show_spinner=False)
+@st.cache_resource(show_spinner=False)
+def cloud_reader(url,key,source):
+    return IncrementalReader(Supabase(url,key),source)
+
+
+@st.cache_data(ttl=4,show_spinner=False)
 def cloud_data(url,key,source):
-    rows=Supabase(url,key).read(source)
-    return validate_document({'schema_version':1,'source_id':source,'objects':rows,
-        'fetched_at':datetime.now(timezone.utc).isoformat()})
+    return cloud_reader(url,key,source).read()
 
 
 @st.cache_data(show_spinner=False)
@@ -67,6 +69,7 @@ def graph(rows,field,title,unit):
         customdata=[r['id'] for r in rows],hovertemplate='ID %{customdata}<br>%{x}<br>%{y}<extra></extra>',
         connectgaps=False))
     fig.update_layout(title=title,xaxis_title='Recepção original (horário de Brasília)',yaxis_title=unit,
+        uirevision=field,
         margin=dict(l=10,r=10,t=45,b=20),height=310,paper_bgcolor='#F8FAFC',plot_bgcolor='white')
     st.plotly_chart(fig,width='stretch')
 
@@ -93,7 +96,6 @@ def monitor():
             data=cloud_data(url,key,source); objects=unpack(data)
             st.session_state['cloud_last_data']=data
             st.session_state['cloud_last_fetch']=data['fetched_at']
-            st.success('Consulta ao Supabase concluída. Isso não comprova que o sensor esteja transmitindo agora.')
         except Exception:
             st.error('Consulta à nuvem indisponível. Credenciais e detalhes internos foram omitidos.')
             if 'cloud_last_data' not in st.session_state:return

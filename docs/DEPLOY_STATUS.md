@@ -10,7 +10,7 @@ A consulta `.marco3_local/verificar_carga_supabase.sql` foi executada no Supabas
 
 O SQLite passou em `integrity_check`; todas as linhas existentes antes da carga foram comparadas por tabela e preservadas. A outbox foi copiada antes do envio. A API local estava parada e foi reiniciada em segundo plano: `/health` retornou HTTP 200, `banco=ok`, `auth=True`. Não houve alteração de firewall ou exposição pública da API. A suíte completa foi reexecutada: **129 testes aprovados**, com um aviso preexistente de depreciação; os testes do painel agora isolam variáveis de nuvem para não usar credenciais locais reais.
 
-Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote `.marco3_local/publicacao_streamlit/` foi atualizado e auditado: **74 arquivos versionados**, incluindo o manifesto, e commit local criado com a identidade Git já configurada. O remoto GitHub foi configurado e o push da branch `main` foi concluido, com igualdade do commit local e remoto. Os arquivos extras encontrados eram apenas caches Python ignorados pelo Git e foram preservados.
+Os resultados anteriores abaixo documentam a preparação inicial; as pendências de configuração de Supabase/Auth foram resolvidas nesta atualização. Deploy do Streamlit e QR Code continuam pendentes. O pacote `.marco3_local/publicacao_streamlit/` foi atualizado e auditado: **76 arquivos versionados**, incluindo o manifesto, e commit local criado com a identidade Git já configurada. O remoto GitHub foi configurado e o push da branch `main` foi concluido, com igualdade do commit local e remoto. Os arquivos extras encontrados eram apenas caches Python ignorados pelo Git e foram preservados.
 
 ### Repositorio publicado no GitHub
 
@@ -19,6 +19,10 @@ O pacote auditado foi enviado para [uff-monitoramento-vibracoes-sem-adicionar-RE
 Entrypoint para Streamlit Community Cloud: `dashboard/app_publico.py`. Dependencias: `dashboard/requirements.txt`; horario de Brasilia com `tzdata`. Os secrets de leitura estao prontos apenas no arquivo local ignorado `.streamlit/secrets.toml`. Login e criacao do app no Streamlit ainda dependem do operador; nao ha URL publica do dashboard ou QR Code confirmados.
 
 ### Dashboard e operação nesta etapa
+
+Atualização de fluidez: o painel mantém um cache compartilhado protegido por lock e consulta alterações por `received_at`, com sobreposição de dois minutos e merge por identidade. A carga completa ocorre inicialmente e a cada cinco minutos para reconciliação; o fragmento visual continua atualizando aproximadamente a cada cinco segundos. Em uma comparação na rede real, a carga inicial retornou 6.690 objetos em 2,384 s; a consulta incremental retornou 25 objetos em 0,209 s, mantendo o histórico completo. São tempos observados nessa execução, sem garantia para outras redes. A carga inicial e a reconciliação completa ainda podem demorar mais.
+
+A mensagem de sucesso repetitiva foi retirada e o aviso de validação do ML ficou na área de Machine Learning. Falhas de consulta, uso de cache e idade da medição continuam identificados. Os gráficos preservam o zoom por `uirevision`. Não houve alteração de modelos, scores, limiares ou registros originais. Os 31 testes de sincronização e dashboard passaram, incluindo atualização incremental, sobreposição, reenvio sem duplicação, reconciliação e preservação do cache após falha.
 
 Gráficos, tabelas e horários de medição, consulta e sincronização são exibidos no fuso **America/Sao_Paulo (Brasília, UTC−3 nas datas desta campanha)**. A conversão ocorre somente na apresentação; SQLite, Supabase, replay e scores mantêm os timestamps UTC originais. A dependência `tzdata` está incluída para disponibilizar o fuso também no Windows.
 
@@ -119,3 +123,8 @@ Todos a partir de `monitoramento_ventilador`, no PowerShell:
 ```
 
 Detalhes de SQL, permissões, secrets, publicação e QR: [guia de nuvem](guia_nuvem.md). O pacote preparado não contém banco original, outbox, credenciais, backups, firmware local ou pickle. O processo de aquisição existente pode continuar ativo; não iniciar duas APIs na porta 8000.
+
+
+### Validacao da atualizacao incremental
+
+A suite completa apos esta alteracao passou com **132 testes aprovados**, com um aviso preexistente de depreciacao. A visao geral foi exercitada com leitura real do Supabase, tres metricas e ausencia dos dois avisos removidos. A limitacao de generalizacao permanece explicada na area de Machine Learning. A API, o worker, o firmware, os registros e os modelos foram preservados.

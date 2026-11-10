@@ -54,12 +54,16 @@ class Supabase:
         if r.status_code != 200 or r.json()!=len(batch):
             raise RuntimeError('Lote nao confirmado pelo Supabase; sera reenviado')
 
-    def read(self,source_id,max_rows=20000):
+    def read(self,source_id,max_rows=20000,since=None):
         result=[]
         for offset in range(0,max_rows,1000):
+            params={'source_id':'eq.'+source_id,'select':'kind,entity_id,payload,received_at',
+                    'order':'kind,entity_id' if since is None else 'received_at,kind,entity_id',
+                    'offset':offset,'limit':min(1000,max_rows-offset)}
+            if since is not None:
+                params['received_at']='gte.'+since
             r=self.session.get(self.url+'/rest/v1/vibration_objects',headers=self.headers,
-                params={'source_id':'eq.'+source_id,'select':'kind,entity_id,payload,received_at',
-                        'order':'kind,entity_id','offset':offset,'limit':min(1000,max_rows-offset)},
+                params=params,
                 timeout=(5,15),allow_redirects=False)
             if r.status_code!=200:
                 raise RuntimeError('Leitura da nuvem indisponivel; nenhuma credencial exibida')
